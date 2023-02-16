@@ -10,18 +10,19 @@ import (
 )
 
 // Batch write items to a single table.
-func WriteAllItemsUsingBatchWrite[I any](dynamoClient dynamodb.Client, ctx context.Context, tableName *string, arr []I) error {
-	return batchWrite(dynamoClient, ctx, tableName, arr)
+func PutAllItemsUsingBatchWrite[I any](dynamoClient dynamodb.Client, ctx context.Context, tableName *string, arr []I) error {
+	return batchPut(dynamoClient, ctx, tableName, arr)
 }
 
 // currently only made specific to tableName.
-func batchWrite[I any](db dynamodb.Client, ctx context.Context, tableName *string, arr []I) error {
+func batchPut[I any](db dynamodb.Client, ctx context.Context, tableName *string, arr []I) error {
 
+	// limitation of 25 items in a btach write query.
 	chunks := helpers.ArrayChunk(arr, 25)
 
 	for _, chunk := range chunks {
 
-		writes, err := helpers.MakeArrayOfWriteRequests(chunk)
+		writes, err := helpers.MakeArrayOfPutWriteRequests(chunk)
 
 		if err != nil {
 			return err
