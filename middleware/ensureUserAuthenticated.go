@@ -12,7 +12,7 @@ func EnsureUserAuthenticated(config aws.Config, authServiceLambdaName string) gi
 
 	return func(ctx *gin.Context) {
 
-		sessionId := GetSessionFromRequest(ctx)
+		sessionId := helpers.GetSessionFromRequest(ctx)
 
 		if len(sessionId) == 0 {
 			helpers.RenderUnauthorizedError(*ctx)
@@ -41,17 +41,4 @@ func EnsureUserAuthenticated(config aws.Config, authServiceLambdaName string) gi
 
 		ctx.Request.Header.Set("userId", userId)
 	}
-}
-
-func GetSessionFromRequest(ctx *gin.Context) string {
-	cookie, err := ctx.Request.Cookie(constants.AuthHeaderKey)
-
-	var sessionId string
-	if err == nil {
-		sessionId = cookie.Value
-	} else {
-		sessionId = ctx.Request.Header.Get(constants.AuthHeaderKey)
-	}
-
-	return sessionId
 }
