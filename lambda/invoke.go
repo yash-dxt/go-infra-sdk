@@ -3,7 +3,6 @@ package lambda
 import (
 	"context"
 	"encoding/json"
-	"fmt"
 
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-sdk-go-v2/aws"
@@ -18,6 +17,10 @@ type RequestParams struct {
 	Method   string
 	Headers  map[string]string
 	Cookies  []string
+}
+
+type lambdaResponse struct {
+	Body string `json:"body"`
 }
 
 func InvokeLambda[I any](ctx context.Context, config aws.Config, lambda_name string, request_param RequestParams) (I, error) {
@@ -56,19 +59,14 @@ func InvokeLambda[I any](ctx context.Context, config aws.Config, lambda_name str
 		return res, err
 	}
 
-	var m map[string]interface{}
+	var m lambdaResponse
 	err = json.Unmarshal(result.Payload, &m)
 
 	if err != nil {
 		return res, err
 	}
 
-	return convertServiceResponse[I](m["body"])
-}
-
-func convertServiceResponse[I any](serviceRes interface{}) (I, error) {
-	s := fmt.Sprint(serviceRes)
 	var data I
-	err := json.Unmarshal([]byte(s), &data)
+	err = json.Unmarshal([]byte(m.Body), &data)
 	return data, err
 }

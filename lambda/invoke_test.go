@@ -15,7 +15,7 @@ type HelloWorld struct {
 }
 
 var REGION = os.Getenv("AWS_REGION")
-var LAMBDA_NAME = os.Getenv("TEST_LAMBDA")
+var LAMBDA_NAME = os.Getenv("AUTH_SERVICE_LAMBDA")
 
 func TestInvokeLambda(t *testing.T) {
 	res, err := lambda.InvokeLambda[HelloWorld](context.Background(), config.CreateAWSConfig(REGION), LAMBDA_NAME, lambda.RequestParams{

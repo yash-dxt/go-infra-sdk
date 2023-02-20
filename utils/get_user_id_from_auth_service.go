@@ -21,6 +21,10 @@ type CheckSessionAuthRequest struct {
 // ensure AUTH_SERVICE_LAMBDA is set as environment variable.
 func GetUserIdFromAuthService(ctx context.Context, config aws.Config, sessionId string) (string, error) {
 
+	if len(auth_service_lambda) == 0 {
+		return "", errors.New("env variable AUTH_SERVICE_LAMBDA_NAME not found")
+	}
+
 	var userId string
 	res, err := lambda.InvokeLambda[CheckSessionAuthRequest](ctx, config, auth_service_lambda, lambda.RequestParams{
 		Endpoint: auth_service_userid_endpoint,
