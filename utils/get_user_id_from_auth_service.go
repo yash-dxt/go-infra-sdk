@@ -12,7 +12,7 @@ import (
 
 const auth_service_userid_endpoint = "/auth/userId"
 
-var auth_service_lambda = os.Getenv("AUTH_SERVICE_LAMBDA")
+var auth_service_lambda = os.Getenv("AUTH_SERVICE_LAMBDA_NAME")
 
 type CheckSessionAuthRequest struct {
 	UserId string `json:"userId"`
