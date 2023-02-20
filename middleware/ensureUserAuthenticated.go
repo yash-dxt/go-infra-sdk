@@ -8,7 +8,7 @@ import (
 	"github.com/metaphi-org/go-infra-sdk/utils"
 )
 
-func EnsureUserAuthenticated(config aws.Config, authServiceLambdaName string) gin.HandlerFunc {
+func EnsureUserAuthenticated(config aws.Config) gin.HandlerFunc {
 
 	return func(ctx *gin.Context) {
 
@@ -20,7 +20,7 @@ func EnsureUserAuthenticated(config aws.Config, authServiceLambdaName string) gi
 			return
 		}
 
-		userId, errApiReq := utils.GetUserIdFromAuthService(ctx, config, authServiceLambdaName, sessionId)
+		userId, errApiReq := utils.GetUserIdFromAuthService(ctx, config, sessionId)
 
 		if errApiReq != nil {
 

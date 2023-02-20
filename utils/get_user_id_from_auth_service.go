@@ -3,6 +3,7 @@ package utils
 import (
 	"context"
 	"errors"
+	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/metaphi-org/go-infra-sdk/constants"
@@ -11,14 +12,17 @@ import (
 
 const auth_service_userid_endpoint = "/auth/userId"
 
+var auth_service_lambda = os.Getenv("AUTH_SERVICE_LAMBDA")
+
 type CheckSessionAuthRequest struct {
 	UserId string `json:"userId"`
 }
 
-func GetUserIdFromAuthService(ctx context.Context, config aws.Config, authServiceLambdaName string, sessionId string) (string, error) {
+// ensure AUTH_SERVICE_LAMBDA is set as environment variable.
+func GetUserIdFromAuthService(ctx context.Context, config aws.Config, sessionId string) (string, error) {
 
 	var userId string
-	res, err := lambda.InvokeLambda[CheckSessionAuthRequest](ctx, config, authServiceLambdaName, lambda.RequestParams{
+	res, err := lambda.InvokeLambda[CheckSessionAuthRequest](ctx, config, auth_service_lambda, lambda.RequestParams{
 		Endpoint: auth_service_userid_endpoint,
 		Method:   "GET",
 		Headers: map[string]string{
