@@ -14,7 +14,7 @@ type UserFields struct {
 	UserId string
 }
 
-func GetUserIdFromAuthService(config aws.Config) gin.HandlerFunc {
+func RetrieveUserIdFromAuthServiceMiddleware(config aws.Config) gin.HandlerFunc {
 
 	return func(ctx *gin.Context) {
 
