@@ -1,31 +1,58 @@
 package middleware
 
 import (
+	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/gin-gonic/gin"
+	"github.com/metaphi-org/go-infra-sdk/constants"
 	"github.com/metaphi-org/go-infra-sdk/helpers"
+	"github.com/metaphi-org/go-infra-sdk/utils"
 )
 
-const sessionParam = "session"
+const userParam = "user"
 
-const guest_session = "guest_session"
+type UserFields struct {
+	UserId string
+}
 
-func SetSession() gin.HandlerFunc {
+func GetUserIdFromAuthService(config aws.Config) gin.HandlerFunc {
 
 	return func(ctx *gin.Context) {
 
 		sessionId := helpers.GetSessionFromRequest(ctx)
 
 		if len(sessionId) == 0 {
-			ctx.Set(sessionParam, guest_session)
-		} else {
-			ctx.Set(sessionParam, sessionId)
+			return
 		}
+
+		userId, err := utils.GetUserIdFromAuthService(ctx, config, sessionId)
+
+		if err != nil {
+			if err.Error() != constants.ErrorInvalidSessionId {
+				helpers.RenderInternalServerError(*ctx, err.Error())
+				ctx.Abort()
+				return
+			}
+		}
+
+		ctx.Set(userParam, UserFields{
+			UserId: userId,
+		})
 
 	}
 
 }
 
-func GetSessionIdFromSetSessionMiddleware(ctx gin.Context) string {
-	sessionId, _ := ctx.Get(sessionParam)
-	return sessionId.(string)
+func GetUserIdFromContext(ctx *gin.Context) string {
+	userGet, ok := ctx.Get(userParam)
+
+	if !ok {
+		return ""
+	}
+	user, ok := userGet.(UserFields)
+
+	if !ok {
+		return ""
+	}
+
+	return user.UserId
 }
