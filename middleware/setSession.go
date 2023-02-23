@@ -9,7 +9,7 @@ const sessionParam = "session"
 
 const guest_session = "guest_session"
 
-func SetSessionId() gin.HandlerFunc {
+func SetSession() gin.HandlerFunc {
 
 	return func(ctx *gin.Context) {
 
