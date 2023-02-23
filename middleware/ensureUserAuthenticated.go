@@ -8,13 +8,19 @@ import (
 	"github.com/metaphi-org/go-infra-sdk/utils"
 )
 
+type AuthenticatedUserFields struct {
+	UserId string
+}
+
+const userParam = "user"
+
 func EnsureUserAuthenticated(config aws.Config) gin.HandlerFunc {
 
 	return func(ctx *gin.Context) {
 
-		sessionId := helpers.GetSessionFromRequest(ctx)
+		sessionId := GetSessionIdFromSetSessionMiddleware(*ctx) // comes from previous setSessionId middleware.
 
-		if len(sessionId) == 0 {
+		if sessionId == guest_session {
 			helpers.RenderUnauthorizedError(*ctx)
 			ctx.Abort()
 			return
@@ -39,6 +45,14 @@ func EnsureUserAuthenticated(config aws.Config) gin.HandlerFunc {
 
 		}
 
-		ctx.Request.Header.Set("userId", userId)
+		ctx.Set(userParam, AuthenticatedUserFields{
+			UserId: userId,
+		})
 	}
+}
+
+func GetUserIdFromAuthenticateUserMiddleware(ctx *gin.Context) string {
+	userGet, _ := ctx.Get(userParam)
+	user := userGet.(AuthenticatedUserFields)
+	return user.UserId
 }
