@@ -14,7 +14,7 @@ type UserFields struct {
 	UserId string
 }
 
-func RetrieveUserIdFromAuthServiceMiddleware(config aws.Config) gin.HandlerFunc {
+func RetrieveUser(config aws.Config) gin.HandlerFunc {
 
 	return func(ctx *gin.Context) {
 
@@ -26,12 +26,10 @@ func RetrieveUserIdFromAuthServiceMiddleware(config aws.Config) gin.HandlerFunc 
 
 		userId, err := utils.GetUserIdFromAuthService(ctx, config, sessionId)
 
-		if err != nil {
-			if err.Error() != constants.ErrorInvalidSessionId {
-				helpers.RenderInternalServerError(*ctx, err.Error())
-				ctx.Abort()
-				return
-			}
+		if err != nil && err.Error() != constants.ErrorInvalidSessionId {
+			helpers.RenderInternalServerError(*ctx, err.Error())
+			ctx.Abort()
+			return
 		}
 
 		ctx.Set(userParam, UserFields{
@@ -42,17 +40,17 @@ func RetrieveUserIdFromAuthServiceMiddleware(config aws.Config) gin.HandlerFunc 
 
 }
 
-func GetUserIdFromContext(ctx *gin.Context) string {
+func GetUserFromContext(ctx *gin.Context) UserFields {
 	userGet, ok := ctx.Get(userParam)
 
 	if !ok {
-		return ""
+		return UserFields{}
 	}
 	user, ok := userGet.(UserFields)
 
 	if !ok {
-		return ""
+		return UserFields{}
 	}
 
-	return user.UserId
+	return user
 }

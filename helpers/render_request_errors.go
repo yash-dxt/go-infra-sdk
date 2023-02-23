@@ -1,7 +1,6 @@
 package helpers
 
 import (
-	"log"
 	"net/http"
 
 	"github.com/gin-gonic/gin"
@@ -17,9 +16,6 @@ func (r *RequestError) Error() string {
 }
 
 func renderRequestError(ctx gin.Context, reqErr RequestError) {
-	if reqErr.StatusCode == 500 {
-		log.Default().Print(reqErr.Error())
-	}
 	ctx.JSON(reqErr.StatusCode, gin.H{"error": reqErr.Error()})
 }
 
@@ -44,7 +40,6 @@ func RenderBadRequest(ctx gin.Context, message string) {
 }
 
 func RenderInternalServerError(ctx gin.Context, message string) {
-	log.Default().Print(message)
 	ctx.JSON(http.StatusInternalServerError, gin.H{"error": "internal server error", "msg": message})
 }
 

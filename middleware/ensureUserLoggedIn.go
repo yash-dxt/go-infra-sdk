@@ -9,9 +9,9 @@ func EnsureUserLoggedIn() gin.HandlerFunc {
 
 	return func(ctx *gin.Context) {
 
-		userId := GetUserIdFromContext(ctx)
+		user := GetUserFromContext(ctx)
 
-		if len(userId) == 0 {
+		if len(user.UserId) == 0 {
 			helpers.RenderUnauthorizedError(*ctx)
 			ctx.Abort()
 			return
