@@ -1,7 +1,7 @@
 package sqs
 
 // shared btw enrich & pdf2json service.
-type QueueMsg struct {
+type Pdf2JsonQueueMsg struct {
 	Type       string `json:"type"`   // required.
 	RefId      string `json:"ref_id"` // required.
 	TpResultId int    `json:"result_id"`

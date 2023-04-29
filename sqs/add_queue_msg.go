@@ -7,7 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/service/sqs"
 )
 
-func AddMessageToQueue(config aws.Config, ctx context.Context, queueName string, message string) error {
+func AddMessageToQueue(config aws.Config, ctx context.Context, queueName string, message string, delay int) error {
 	client := sqs.NewFromConfig(config)
 
 	result, err := client.GetQueueUrl(ctx, &sqs.GetQueueUrlInput{
@@ -21,8 +21,9 @@ func AddMessageToQueue(config aws.Config, ctx context.Context, queueName string,
 	queueURL := result.QueueUrl
 
 	_, err = client.SendMessage(ctx, &sqs.SendMessageInput{
-		QueueUrl:    queueURL,
-		MessageBody: &message,
+		QueueUrl:     queueURL,
+		MessageBody:  &message,
+		DelaySeconds: int32(delay),
 	})
 
 	return err
