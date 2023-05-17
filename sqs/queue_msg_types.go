@@ -9,5 +9,7 @@ type Pdf2JsonQueueMsg struct {
 	PdfUrl      string `json:"pdf_url"`
 	JsonUrl     string `json:"json_url"`
 	UploadToUrl string `json:"upload_to_url"`
-	Retry       int    `json:"retry"`
+	CheckResult string `json:"check_result"`
+
+	Retry int `json:"retry"`
 }
