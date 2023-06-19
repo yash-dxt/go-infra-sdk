@@ -11,7 +11,8 @@ type Pdf2JsonQueueMsg struct {
 	UploadToUrl string      `json:"upload_to_url"`
 	FraudChecks FraudChecks `json:"fraud_checks"`
 
-	ConvertUsingPdfRobinOnly bool `json:"convert_using_pdf_robin_only"`
+	ConvertUsingPdfRobinOnly      bool   `json:"convert_using_pdf_robin_only"`
+	ConversionCompleteCallbackUrl string `json:"conversion_complete_callback_url"`
 
 	Retry int `json:"retry"`
 }
