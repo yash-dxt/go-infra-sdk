@@ -6,6 +6,8 @@ type Pdf2JsonQueueMsg struct {
 	RefId      string `json:"ref_id"` // required.
 	TpResultId int    `json:"result_id"`
 
+	Password string `json:"password"`
+
 	PdfUrl      string      `json:"pdf_url"`
 	JsonUrl     string      `json:"json_url"`
 	UploadToUrl string      `json:"upload_to_url"`
