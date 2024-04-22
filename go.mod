@@ -1,4 +1,4 @@
-module github.com/metaphi-org/go-infra-sdk
+module github.com/yash-dxt/go-infra-sdk
 
 go 1.19
 
