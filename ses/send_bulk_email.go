@@ -7,7 +7,7 @@ import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
-	"github.com/metaphi-org/go-infra-sdk/helpers"
+	"github.com/yash-dxt/go-infra-sdk/helpers"
 )
 
 // the 'from' email should be authorised in SES for the credentials in config.

@@ -9,8 +9,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/metaphi-org/go-infra-sdk/config"
-	"github.com/metaphi-org/go-infra-sdk/s3"
+	"github.com/yash-dxt/go-infra-sdk/config"
+	"github.com/yash-dxt/go-infra-sdk/s3"
 
 	"github.com/stretchr/testify/assert"
 )

@@ -5,9 +5,9 @@ import (
 	"os"
 	"testing"
 
-	"github.com/metaphi-org/go-infra-sdk/config"
-	"github.com/metaphi-org/go-infra-sdk/lambda"
 	"github.com/stretchr/testify/assert"
+	"github.com/yash-dxt/go-infra-sdk/config"
+	"github.com/yash-dxt/go-infra-sdk/lambda"
 )
 
 type HelloWorld struct {

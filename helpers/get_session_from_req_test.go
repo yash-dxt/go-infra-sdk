@@ -4,9 +4,9 @@ import (
 	"testing"
 
 	"github.com/gin-gonic/gin"
-	"github.com/metaphi-org/go-infra-sdk/constants"
-	"github.com/metaphi-org/go-infra-sdk/helpers"
 	"github.com/stretchr/testify/assert"
+	"github.com/yash-dxt/go-infra-sdk/constants"
+	"github.com/yash-dxt/go-infra-sdk/helpers"
 )
 
 func GetSessionFromRequestTest(t *testing.T) {

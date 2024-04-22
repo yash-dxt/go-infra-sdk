@@ -3,9 +3,9 @@ package middleware
 import (
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/gin-gonic/gin"
-	"github.com/metaphi-org/go-infra-sdk/constants"
-	"github.com/metaphi-org/go-infra-sdk/helpers"
-	"github.com/metaphi-org/go-infra-sdk/utils"
+	"github.com/yash-dxt/go-infra-sdk/constants"
+	"github.com/yash-dxt/go-infra-sdk/helpers"
+	"github.com/yash-dxt/go-infra-sdk/utils"
 )
 
 const userParam = "user"

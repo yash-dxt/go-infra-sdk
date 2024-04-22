@@ -5,10 +5,10 @@ import (
 	"os"
 	"testing"
 
-	"github.com/metaphi-org/go-infra-sdk/config"
-	"github.com/metaphi-org/go-infra-sdk/constants"
-	"github.com/metaphi-org/go-infra-sdk/utils"
 	"github.com/stretchr/testify/assert"
+	"github.com/yash-dxt/go-infra-sdk/config"
+	"github.com/yash-dxt/go-infra-sdk/constants"
+	"github.com/yash-dxt/go-infra-sdk/utils"
 )
 
 var REGION = os.Getenv("AWS_REGION")

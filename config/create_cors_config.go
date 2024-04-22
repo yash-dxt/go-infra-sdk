@@ -5,7 +5,7 @@ import (
 
 	"github.com/gin-contrib/cors"
 	"github.com/gin-gonic/gin"
-	"github.com/metaphi-org/go-infra-sdk/constants"
+	"github.com/yash-dxt/go-infra-sdk/constants"
 )
 
 func CreateGinCorsConfig() gin.HandlerFunc {

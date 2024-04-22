@@ -2,7 +2,7 @@ package helpers
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/metaphi-org/go-infra-sdk/constants"
+	"github.com/yash-dxt/go-infra-sdk/constants"
 )
 
 func GetSessionFromRequest(ctx *gin.Context) string {

@@ -3,7 +3,7 @@ package helpers_test
 import (
 	"testing"
 
-	ut "github.com/metaphi-org/go-infra-sdk/helpers"
+	ut "github.com/yash-dxt/go-infra-sdk/helpers"
 
 	"github.com/stretchr/testify/assert"
 )

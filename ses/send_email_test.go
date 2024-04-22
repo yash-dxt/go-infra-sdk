@@ -6,8 +6,8 @@ import (
 
 	"github.com/aws/aws-sdk-go-v2/aws"
 	"github.com/aws/aws-sdk-go-v2/service/sesv2/types"
-	"github.com/metaphi-org/go-infra-sdk/config"
-	email "github.com/metaphi-org/go-infra-sdk/ses"
+	"github.com/yash-dxt/go-infra-sdk/config"
+	email "github.com/yash-dxt/go-infra-sdk/ses"
 )
 
 func TestSendBulkEmail(t *testing.T) {

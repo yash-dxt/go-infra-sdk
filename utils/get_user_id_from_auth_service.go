@@ -6,8 +6,8 @@ import (
 	"os"
 
 	"github.com/aws/aws-sdk-go-v2/aws"
-	"github.com/metaphi-org/go-infra-sdk/constants"
-	"github.com/metaphi-org/go-infra-sdk/lambda"
+	"github.com/yash-dxt/go-infra-sdk/constants"
+	"github.com/yash-dxt/go-infra-sdk/lambda"
 )
 
 const auth_service_userid_endpoint = "/auth/userId"

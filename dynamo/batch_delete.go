@@ -3,7 +3,7 @@ package dynamo
 import (
 	"context"
 
-	"github.com/metaphi-org/go-infra-sdk/helpers"
+	"github.com/yash-dxt/go-infra-sdk/helpers"
 
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb"
 	"github.com/aws/aws-sdk-go-v2/service/dynamodb/types"

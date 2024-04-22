@@ -2,7 +2,7 @@ package middleware
 
 import (
 	"github.com/gin-gonic/gin"
-	"github.com/metaphi-org/go-infra-sdk/helpers"
+	"github.com/yash-dxt/go-infra-sdk/helpers"
 )
 
 func EnsureUserLoggedIn() gin.HandlerFunc {
